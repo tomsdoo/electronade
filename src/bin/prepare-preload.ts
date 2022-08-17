@@ -1,17 +1,16 @@
 #!/usr/bin/env node
-"use strict";
-
 import { Command } from "commander";
 import { writeFile } from "fs/promises";
 import { cwd } from "process";
 import { join } from "path";
+
 const program = new Command();
 const commandname = "electronade";
 
 program
-.option('-c --config <electronade-prepare-preload.config.js path>', 'preparing config file')
-.option('--prepare-preload', 'prepare preload.ts')
-.option('--init', 'initialize config file');
+  .option('--prepare-preload', 'prepare preload.ts')
+  .option('-c --config <electronade-prepare-preload.config.js path>', 'preparing config file')
+  .option('--init', 'initialize config file');
 
 program.on("--help", () => {
   console.log("");
