@@ -6,6 +6,6 @@
      "outDir": "./bin/",
   },
   "files":[
-    "src/bin/prepare-preload.ts"
+    "src/bin/electronade.ts"
   ]
 }

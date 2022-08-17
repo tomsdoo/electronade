@@ -6,7 +6,7 @@
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
   "bin": {
-    "electronade": "bin/prepare-preload.js"
+    "electronade": "bin/electronade.js"
   },
   "scripts": {
     "build": "tsc --project tsconfig.cjs.json && tsc --project tsconfig.esm.json && tsc --project tsconfig.bin.json",
