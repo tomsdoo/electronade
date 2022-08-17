@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 import { Command } from "commander";
-import { writeFile } from "fs/promises";
-import { cwd } from "process";
-import { join } from "path";
+import { initializeConfigFile } from "./opts/";
 
 const program = new Command();
 const commandname = "electronade";
@@ -29,17 +27,5 @@ if(Object.values(opts).length === 0){
 }
 
 if(opts.init){
-  const filePath = join(
-    cwd(),
-    "./electronade.prepare.config.js"
-  );
-  const content = `
-const { join } = require("path");
-module.exports = {
-  base: join(__dirname, "./src/preload.ts"),
-  output: {
-    file: join(__dirname, "./src/merged-preload.ts")
-  }
-};`;
-  writeFile(filePath, content);
+  initializeConfigFile();
 }
