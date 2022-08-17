@@ -1,5 +1,5 @@
-bin/*.d.ts
-bin/*.js
+bin/**/*.d.ts
+bin/**/*.js
 dist/
 node_modules/
 package-lock.json
