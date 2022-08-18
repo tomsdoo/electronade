@@ -3,11 +3,13 @@ import { join } from "path";
 import { writeFile } from "fs/promises";
 
 const configFileContent = `const { join } = require("path");
+
 module.exports = {
   base: join(__dirname, "./src/preload.ts"),
   output: {
     file: join(__dirname, "./src/merged-preload.ts")
-  }
+  },
+  preloadObjects: {}
 };`;
 
 export async function initializeConfigFile(){

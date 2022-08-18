@@ -1,3 +1,4 @@
+import { v4 as uuid } from "uuid";
 import { cwd } from "process";
 import { join } from "path";
 import {
@@ -6,17 +7,80 @@ import {
   writeFile
 } from "fs/promises";
 
+type PreloadObject = {
+  [key: string]: {
+    [key: string]: Function;
+  }
+};
+type PreloadObjects = {
+  [key: string]: PreloadObject;
+};
+
+function generatePreloadLines(preloadObjects: PreloadObjects){
+  const dictionary: {
+    [key: string]: string;
+  } = {};
+
+  const mergedObj = Object.fromEntries(
+    Object.values(preloadObjects)
+      .map((preloadObject: PreloadObject) =>
+        Object.entries(preloadObject)
+          .map(([propName, propObj]) => {
+            return [propName, propObj];
+          })).flat()
+  );
+
+  if(Object.keys(mergedObj).length === 0){return "";}
+
+  const tempObj = Object.fromEntries(
+    Object.entries(mergedObj)
+      .map(([ propName, propObj ]) => [
+        propName,
+        Object.fromEntries(
+          Object.entries(propObj as object)
+            .map(([ methodName, method ]) => {
+              const did = uuid();
+              dictionary[did] = method.toString();
+              return [methodName, did];
+            })
+        )
+      ])
+  );
+
+  return `
+contextBridge.exposeInMainWorld("electronade", ${
+  Object.entries(dictionary)
+    .reduce(
+      (text, [dictionaryId, methodText]) => text.replace(`"${dictionaryId}"`, methodText),
+      JSON.stringify(tempObj, null, 2)
+    )
+});
+`;
+}
+
 export async function preparePreload(configPath: string){
   const localPath = join(cwd(), configPath);
   const filePath = await stat(localPath)
     .then(r => localPath)
     .catch(e => configPath);
   console.log(filePath);
-  const { base, output:{ file: outPath } } = require(filePath);
+  const {
+    base,
+    output:{ file: outPath },
+    preloadObjects
+  } = require(filePath);
   console.log({
     base,
-    outPath
+    outPath,
+    preloadObjects
   });
   const baseContent = await readFile(base, { encoding: "utf8" });
-  await writeFile(outPath, baseContent + "// WIP");
+  const additionalContent = generatePreloadLines(preloadObjects);
+  const generatedContent = [
+    baseContent,
+    additionalContent
+  ]
+    .filter(Boolean)
+    .join("\n");
+  await writeFile(outPath, generatedContent);
 }
