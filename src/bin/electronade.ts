@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 import { Command } from "commander";
-import { initializeConfigFile } from "./opts/";
+import {
+  initializeConfigFile,
+  preparePreload
+} from "./opts/";
 
 const program = new Command();
 const commandname = "electronade";
@@ -28,4 +31,7 @@ if(Object.values(opts).length === 0){
 
 if(opts.init){
   initializeConfigFile();
+}else if(opts.preparePreload){
+  if(!opts.config){program.help();}
+  preparePreload(opts.config);
 }
