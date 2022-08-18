@@ -65,16 +65,18 @@ export async function preparePreload(configPath: string){
     .catch(e => configPath);
   console.log(filePath);
   const {
-    base,
+    input: {
+      baseFile,
+      preloadObjects
+    },
     output:{ file: outPath },
-    preloadObjects
   } = require(filePath);
   console.log({
-    base,
+    baseFile,
     outPath,
     preloadObjects
   });
-  const baseContent = await readFile(base, { encoding: "utf8" });
+  const baseContent = await readFile(baseFile, { encoding: "utf8" });
   const additionalContent = generatePreloadLines(preloadObjects);
   const generatedContent = [
     baseContent,
