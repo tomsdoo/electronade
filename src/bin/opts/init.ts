@@ -6,11 +6,11 @@ const configFileContent = `const { join } = require("path");
 
 module.exports = {
   input: {
-    baseFile: join(__dirname, "./src/preload.ts"),
+    baseFile: join(__dirname, "./src/preload_base.ts"),
     preloadObjects: {}
   },
   output: {
-    file: join(__dirname, "./src/merged-preload.ts")
+    file: join(__dirname, "./src/preload.ts")
   }
 };`;
 
