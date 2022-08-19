@@ -7,6 +7,7 @@ const configFileContent = `const { join } = require("path");
 module.exports = {
   input: {
     baseFile: join(__dirname, "./src/preload_base.ts"),
+    exposingName: "electronade",
     preloadObjects: {}
   },
   output: {

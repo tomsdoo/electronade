@@ -16,7 +16,7 @@ type PreloadObjects = {
   [key: string]: PreloadObject;
 };
 
-function generatePreloadLines(preloadObjects: PreloadObjects){
+function generatePreloadLines(exposingName: string, preloadObjects: PreloadObjects){
   const dictionary: {
     [key: string]: string;
   } = {};
@@ -48,7 +48,7 @@ function generatePreloadLines(preloadObjects: PreloadObjects){
   );
 
   return `
-contextBridge.exposeInMainWorld("electronade", ${
+contextBridge.exposeInMainWorld("${exposingName}", ${
   Object.entries(dictionary)
     .reduce(
       (text, [dictionaryId, methodText]) => text.replace(`"${dictionaryId}"`, methodText),
@@ -67,6 +67,7 @@ export async function preparePreload(configPath: string){
   const {
     input: {
       baseFile,
+      exposingName,
       preloadObjects
     },
     output:{ file: outPath },
@@ -74,10 +75,11 @@ export async function preparePreload(configPath: string){
   console.log({
     baseFile,
     outPath,
+    exposingName,
     preloadObjects
   });
   const baseContent = await readFile(baseFile, { encoding: "utf8" });
-  const additionalContent = generatePreloadLines(preloadObjects);
+  const additionalContent = generatePreloadLines(exposingName, preloadObjects);
   const generatedContent = [
     baseContent,
     additionalContent
