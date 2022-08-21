@@ -47,12 +47,32 @@ function generatePreloadLines(exposingName: string, preloadObjects: PreloadObjec
       ])
   );
 
+  const dictionaryKeys = Object.keys(dictionary);
+  const textWithTsIgnore = JSON.stringify(tempObj, null, 2)
+    .split("\n")
+    .map(line => {
+      const lineToBeCommended = dictionaryKeys.some(
+        dictionaryKey => line.match(new RegExp(`"${dictionaryKey}"`))
+      );
+      const preSpaces = [
+        // @ts-ignore
+        ...Array(line.indexOf(line.replace(/^\s+/,"")))
+          .keys()
+      ]
+        .map(() => " ").join("");
+      return lineToBeCommended
+        ? [`${preSpaces}// @ts-ignore`, line]
+        : [line];
+    })
+    .flat()
+    .join("\n");
+
   return `
 contextBridge.exposeInMainWorld("${exposingName}", ${
   Object.entries(dictionary)
     .reduce(
       (text, [dictionaryId, methodText]) => text.replace(`"${dictionaryId}"`, methodText),
-      JSON.stringify(tempObj, null, 2)
+      textWithTsIgnore
     )
 });
 `;
