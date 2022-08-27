@@ -58,6 +58,7 @@ const { preloadObject: otherPreload } = require("electronade-other");
 module.exports = {
   input: {
     baseFile: "path/to/preload_base.ts",
+    exposingName: "electronade",
     preloadObjects: {
       somePreload,
       otherPreload
