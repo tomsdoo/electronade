@@ -8,7 +8,7 @@ type Handles = {
   [key: string]: Handle[];
 };
 
-export function setHandles(handles: Handles){
+export const setHandles = (handles: Handles) => {
   Object.values(handles)
     .forEach(arrayOfHandles => {
       arrayOfHandles.forEach(({ eventName, handler }) => {
@@ -16,4 +16,4 @@ export function setHandles(handles: Handles){
         ipcMain.handle(eventName, handler);
       });
     });
-}
+};
