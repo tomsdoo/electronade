@@ -1,4 +1,4 @@
-import { ipcMain } from "electron";
+const { ipcMain } = require("electron");
 
 type Handle = {
   eventName: string;
