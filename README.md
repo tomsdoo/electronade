@@ -36,7 +36,7 @@ import {
   IpcRendererEvent
 } from "electron";
 
-contextBridge.exposeInMainWorld("originalAPI", {
+contextBridge.exposeInMainWorld("ownAPI", {
   mine: {
     work: (message: string) =>
       ipcRenderer.invoke("mine:work", message)
@@ -79,5 +79,5 @@ npx electronade --prepare-preload --config electronade.prepare.config.js
 ``` javascript
 const result1 = await electronade.some.work(params);
 const result2 = await electronade.other.anotherWork();
-const result3 = await originalAPI.mine.work("message");
+const result3 = await ownAPI.mine.work("message");
 ```
