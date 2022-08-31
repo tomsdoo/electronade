@@ -26,11 +26,14 @@ describe("setHandles", () => {
       .withArgs(eventName, handler)
       .returns(undefined);
 
-    eval(setHandles.toString())({
-      testHandles: [
-        { eventName, handler }
-      ]
-    });
+    assert.equal(
+      eval(setHandles.toString())({
+        testHandles: [
+          { eventName, handler }
+        ]
+      }),
+      undefined
+    );
 
     mocked.verify();
     mocked.restore();
