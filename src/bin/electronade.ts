@@ -32,6 +32,5 @@ if(Object.values(opts).length === 0){
 if(opts.init){
   initializeConfigFile();
 }else if(opts.preparePreload){
-  if(!opts.config){program.help();}
   preparePreload(opts.config);
 }
