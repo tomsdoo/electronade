@@ -1,9 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="https://unpkg.com/vue@3"></script>
   <script>
-    window.addEventListener("load", () => {
+    const markdownPaths = [
+      "/md/test1.md",
+      "/md/test2.md"
+    ];
+    let pageContents = {};
+    async function fetchPageContent(path){
+      return fetch(path)
+        .then(async response => ({
+          rawPath: path,
+          hashPath: path
+            .replace(/index\.md$/, "")
+            .replace(/\.md$/, ""),
+          url: response.url,
+          text: await response.text()
+        }))
+        .then(content => ({
+          ...content,
+          title: content.text.split("\n")[0].replace(/^# /, ""),
+          html: marked.parse(content.text)
+        }));
+    }
+    window.addEventListener("load", async () => {
+      pageContents = Object.fromEntries(
+        await Promise.all(
+          markdownPaths.map(async (markdownPath) => [markdownPath, await fetchPageContent(markdownPath)])
+        )
+      );
+      console.log(pageContents);
+
       const app = Vue.createApp({
         setup: () => ({
           message: "hello"
