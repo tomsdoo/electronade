@@ -1,8 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <script src="https://unpkg.com/vue@3"></script>
+  <script>
+    window.addEventListener("load", () => {
+      const app = Vue.createApp({
+        setup: () => ({
+          message: "hello"
+        })
+      });
+      app.mount("#app");
+      console.log(Vue);
+    });
+  </script>
 </head>
 <body>
-  test
+  <main id="app">
+    {{ message }}
+  </main>
 </body>
 </html>
