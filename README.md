@@ -45,12 +45,12 @@ contextBridge.exposeInMainWorld("ownAPI", {
 ```
 
 initialize config file for preload preparation.
-`electronade.prepare.config.js` will be generated.
+`electronade.config.js` will be generated.
 ``` shell
 npx electronade --init
 ```
 
-edit `electronade.prepare.config.js`
+edit `electronade.config.js`
 ``` javascript
 const { preloadObject: somePreload } = require("electronade-some");
 const { preloadObject: otherPreload } = require("electronade-other");
@@ -72,7 +72,7 @@ module.exports = {
 
 prepare merged preload file.
 ``` shell
-npx electronade --prepare-preload --config electronade.prepare.config.js
+npx electronade --prepare-preload --config electronade.config.js
 ```
 
 ### calling from renderer
