@@ -78,11 +78,15 @@ contextBridge.exposeInMainWorld("${exposingName}", ${
 `;
 }
 
-export async function preparePreload(configPath: string){
-  const localPath = join(cwd(), configPath);
+export async function preparePreload(configPath?: string){
+  const localPath = join(cwd(), configPath || "electronade.config.js");
   const filePath = await stat(localPath)
     .then(r => localPath)
     .catch(e => configPath);
+  if(!filePath){
+    console.log("config file is not found");
+    return;
+  }
   console.log(filePath);
   const {
     input: {
