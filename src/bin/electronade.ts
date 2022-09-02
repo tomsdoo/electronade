@@ -24,7 +24,6 @@ program.on("--help", () => {
 program.parse(process.argv);
 
 const opts = program.opts();
-console.log(opts);
 
 if(Object.values(opts).length === 0){
   program.help();
