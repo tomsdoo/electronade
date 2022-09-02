@@ -87,7 +87,7 @@ export async function preparePreload(configPath?: string){
     console.log("config file is not found");
     return;
   }
-  console.log(filePath);
+
   const {
     input: {
       baseFile,
