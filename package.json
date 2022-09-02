@@ -10,6 +10,7 @@
   },
   "scripts": {
     "build": "tsc --project tsconfig.cjs.json && tsc --project tsconfig.esm.json && tsc --project tsconfig.bin.json",
+    "serve:doc": "ts-node doc_server",
     "test": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha -r ts-node/register \"test/**/*.ts\" --timeout 30000"
   },
   "keywords": [],
