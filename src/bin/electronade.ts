@@ -10,7 +10,7 @@ const commandname = "electronade";
 
 program
   .option('--prepare-preload', 'prepare preload.ts')
-  .option('-c --config <electronade-prepare-preload.config.js path>', 'preparing config file')
+  .option('-c --config <electronade.config.js path>', 'config file')
   .option('--init', 'initialize config file');
 
 program.on("--help", () => {
@@ -18,6 +18,7 @@ program.on("--help", () => {
   console.log("Example call:");
   console.log(`  $${commandname} --help`);
   console.log(`  $${commandname} --init`);
+  console.log(`  $${commandname} --prepare-preload`);
 });
 
 program.parse(process.argv);
