@@ -96,12 +96,7 @@ export async function preparePreload(configPath?: string){
     },
     output:{ file: outPath },
   } = require(filePath);
-  console.log({
-    baseFile,
-    outPath,
-    exposingName,
-    preloadObjects
-  });
+
   const baseContent = await readFile(baseFile, { encoding: "utf8" })
     .catch(() => `import { contextBridge, ipcRenderer } from "electron";\n`);
   const additionalContent = generatePreloadLines(exposingName, preloadObjects);
