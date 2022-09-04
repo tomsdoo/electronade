@@ -2,6 +2,7 @@ body {
   display: grid;
   grid-template:
     "header" max-content
-    "main  " max-content
+    "main  " 1fr
     "footer" max-content / 1fr;
+  min-height: 100vh;
 }
