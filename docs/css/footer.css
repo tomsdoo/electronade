@@ -1,3 +1,21 @@
 #footer {
   grid-area: footer;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  height: 2rem;
+}
+
+#footer > .footer-link {
+  display: grid;
+  grid-template:
+    "text icon" max-content / max-content max-content;
+  align-items: center;
+}
+#footer > .footer-link > .text {
+  grid-area: text;
+}
+#footer > .footer-link > .icon {
+  grid-area: icon;
+  font-size: 1em;
 }
