@@ -4,6 +4,7 @@
   justify-content: center;
   align-items: center;
   height: 2rem;
+  box-shadow: 0 0 1px;
 }
 
 #footer > .footer-link {
