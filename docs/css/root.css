@@ -1,0 +1,7 @@
+body {
+  display: grid;
+  grid-template:
+    "header" max-content
+    "main  " max-content
+    "footer" max-content / 1fr;
+}
