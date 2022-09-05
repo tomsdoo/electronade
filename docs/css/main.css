@@ -2,17 +2,27 @@
   grid-area: main;
   display: grid;
   grid-template:
-    "index content" max-content / max-content 1fr;
+    "index content" 1fr / max-content 1fr;
   width: min(1100px, calc(100vw - 2rem));
   margin: 0 auto;
+  height: var(--main-height);
+  grid-gap: 1rem;
 }
 
 .index-list {
   grid-area: index;
+  height: 100%;
+  overflow-y: auto;
 }
 
 main > .content {
   grid-area: content;
+  height: 100%;
+  overflow-y: auto;
+}
+
+main > .content > .article {
+  min-height: 100%;
 }
 
 @media screen and (max-width: 600px) {
