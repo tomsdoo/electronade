@@ -71,6 +71,8 @@
           async (markdownPath) => await fetchPageContent(markdownPath)
         )
       );
+      // TODO: remove below line, index items are increased temporarily
+      state.pageContents = [...Array(50).keys()].map(() => [...state.pageContents]).flat();
 
       console.log(state.pageContents)
 
@@ -95,8 +97,15 @@
   </header>
   <main id="app" v-cloak>
     <ul class="index-list">
-      <li v-for="page in state.pageContents">
-        <a :href="'#'+page.hashPath">
+      <li
+        v-for="(page, index) in state.pageContents"
+        :key="index"
+        class="item"
+      >
+        <a
+          :href="'#'+page.hashPath"
+          class="link"
+        >
           {{ page.title }}
         </a>
       </li>
