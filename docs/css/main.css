@@ -15,6 +15,14 @@
   overflow-y: auto;
 }
 
+.index-list > .item > .link {
+  display: block;
+  padding: 0.2em 1em;
+}
+.index-list > .item > .link:hover {
+  text-shadow: 0 0 0.5px;
+}
+
 main > .content {
   grid-area: content;
   height: 100%;
