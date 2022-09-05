@@ -13,6 +13,8 @@
   grid-area: index;
   height: 100%;
   overflow-y: auto;
+  min-width: 10rem;
+  max-width: 15rem;
 }
 
 .index-list > .item > .link {
@@ -37,6 +39,10 @@ main > .content > .article {
   #app {
     grid-template:
       "index" max-content
-      "content" max-content / 1fr;
+      "content" 1fr / 1fr;
+  }
+  .index-list {
+    max-height: 20vh;
+    max-width: 100%;
   }
 }
