@@ -95,7 +95,7 @@
     electronade
   </header>
   <main id="app" v-cloak>
-    <ul>
+    <ul class="index-list">
       <li v-for="page in state.pageContents">
         <a :href="'#'+page.hashPath">
           {{ page.title }}
@@ -103,7 +103,11 @@
       </li>
     </ul>
     {{ message }}
-    <article v-if="state.currentPage" v-html="state.currentPage.html" />
+    <article
+      v-if="state.currentPage"
+      v-html="state.currentPage.html"
+      class="article"
+    />
   </main>
   <footer id="footer">
     <a
