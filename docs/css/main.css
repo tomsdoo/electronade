@@ -1,3 +1,24 @@
 #app {
   grid-area: main;
+  display: grid;
+  grid-template:
+    "index content" max-content / max-content 1fr;
+  width: min(1100px, calc(100vw - 2rem));
+  margin: 0 auto;
+}
+
+.index-list {
+  grid-area: index;
+}
+
+.article {
+  grid-area: content;
+}
+
+@media screen and (max-width: 600px) {
+  #app {
+    grid-template:
+      "index" max-content
+      "content" max-content / 1fr;
+  }
 }
