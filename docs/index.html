@@ -58,9 +58,9 @@
     function reflectPage(page){
       console.log(page)
       state.currentPage = undefined;
-      waitMs(1).then(() => {
+      waitMs(1).then(async () => {
         state.currentPage = page;
-        waitMs(1);
+        return await waitMs(1);
       }).then(() => {
         hljs.highlightAll();
       });
@@ -103,11 +103,15 @@
       </li>
     </ul>
     {{ message }}
-    <article
-      v-if="state.currentPage"
-      v-html="state.currentPage.html"
-      class="article"
-    />
+    <section class="content">
+      <transition name="fade">
+        <article
+          v-if="state.currentPage"
+          v-html="state.currentPage.html"
+          class="article"
+        />
+      </transition>
+    </section>
   </main>
   <footer id="footer">
     <a
