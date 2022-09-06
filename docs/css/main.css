@@ -50,10 +50,14 @@
 main > .content {
   grid-area: content;
   height: 100%;
-  overflow-y: auto;
+  overflow: hidden;
 }
 
-main > .content > .article {
+main > .content > .article-wrapper {
+  height: 100%;
+  overflow-y: auto;
+}
+main > .content > .article-wrapper > .article {
   min-height: 100%;
 }
 
