@@ -4,6 +4,13 @@
   --main-height: calc(100vh - var(--header-height) - var(--footer-height));
 }
 
+.scroll-hidden {
+  scrollbar-width: none;
+}
+.scroll-hidden::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   display: grid;
   grid-template:
