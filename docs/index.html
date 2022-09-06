@@ -11,9 +11,10 @@
   <link rel="stylesheet" href="/css/main.css" />
   <link rel="stylesheet" href="/css/footer.css" />
   <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/markdown.css" />
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons%7CMaterial+Icons+Outlined" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/nord.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/stackoverflow-light.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" async defer></script>
@@ -119,6 +120,7 @@
           <article
             v-if="state.currentPage"
             v-html="state.currentPage.html"
+            id="article"
             class="article"
           />
         </transition>
