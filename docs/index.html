@@ -96,21 +96,23 @@
     electronade
   </header>
   <main id="app" v-cloak>
-    <ul class="index-list scroll-hidden">
-      <li
-        v-for="(page, index) in state.pageContents"
-        :key="index"
-        class="item"
-      >
-        <a
-          :href="'#'+page.hashPath"
-          class="link"
+    <section class="index main-padded">
+      <ul class="index-list scroll-hidden">
+        <li
+          v-for="(page, index) in state.pageContents"
+          :key="index"
+          class="item"
         >
-          <span class="material-icons-outlined icon">article</span>
-          <span class="text">{{ page.title }}</span>
-        </a>
-      </li>
-    </ul>
+          <a
+            :href="'#'+page.hashPath"
+            class="link"
+          >
+            <span class="material-icons-outlined icon">article</span>
+            <span class="text">{{ page.title }}</span>
+          </a>
+        </li>
+      </ul>
+    </section>
     <section class="content scroll-hidden">
       <transition name="fade">
         <article
