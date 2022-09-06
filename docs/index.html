@@ -113,14 +113,16 @@
         </li>
       </ul>
     </section>
-    <section class="content scroll-hidden">
-      <transition name="fade">
-        <article
-          v-if="state.currentPage"
-          v-html="state.currentPage.html"
-          class="article"
-        />
-      </transition>
+    <section class="content main-padded">
+      <div class="article-wrapper scroll-hidden">
+        <transition name="fade">
+          <article
+            v-if="state.currentPage"
+            v-html="state.currentPage.html"
+            class="article"
+          />
+        </transition>
+      </div>
     </section>
   </main>
   <footer id="footer">
