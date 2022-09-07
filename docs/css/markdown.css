@@ -37,7 +37,8 @@
   margin: 1rem 0;
 }
 
-#article p code {
+#article p code,
+#article li code {
   padding: 0 0.5em;
   background: #eeeeee;
 }
