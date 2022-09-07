@@ -78,3 +78,8 @@
   border: 1px solid #aaaaaa;
   padding: 0.2em 0.5em;
 }
+
+/* mermaid.js */
+#article > pre > code.language-mermaid {
+  display: none;
+}
