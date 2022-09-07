@@ -37,8 +37,7 @@
   margin: 1rem 0;
 }
 
-#article p code,
-#article li code {
+#article code:not(.hljs) {
   padding: 0 0.5em;
   background: #eeeeee;
 }
