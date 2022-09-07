@@ -26,10 +26,10 @@ body {
   transition: opacity 1000ms;
 }
 
-.fade-enter, .fade-leave-to {
+.fade-enter-from, .fade-leave-to {
   opacity: 0;
 }
 
-.fade-leave, .fade-enter-to {
+.fade-leave-from, .fade-enter-to {
   opacity: 1;
 }
