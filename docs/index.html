@@ -27,6 +27,7 @@
     const state = Vue.reactive({
       pageContents: [],
       currentPage: undefined,
+      indexFolded: false
     });
 
     async function fetchPageContent(path){
@@ -66,6 +67,9 @@
         hljs.highlightAll();
       });
     }
+    function toggleIndexFolded(){
+      state.indexFolded = !state.indexFolded;
+    }
     window.addEventListener("load", async () => {
       state.pageContents = await Promise.all(
         markdownPaths.map(
@@ -79,7 +83,8 @@
 
       const app = Vue.createApp({
         setup: () => ({
-          state
+          state,
+          toggleIndexFolded
         })
       });
       app.mount("#app");
@@ -97,8 +102,14 @@
     electronade
   </header>
   <main id="app" v-cloak>
-    <section class="index main-padded">
-      <ul class="index-list scroll-hidden">
+    <section
+      class="index main-padded"
+      :class="[state.indexFolded && 'folded']"
+    >
+      <ul
+        class="index-list scroll-hidden"
+        :class="[state.indexFolded && 'folded']"
+      >
         <li
           v-for="(page, index) in state.pageContents"
           :key="index"
@@ -113,6 +124,24 @@
           </a>
         </li>
       </ul>
+      <button
+        v-on:click="toggleIndexFolded()"
+        class="index-toggle-button"
+      >
+        index
+        <span
+          v-if="state.indexFolded"
+          class="material-icons-outlined icon"
+        >
+          expand_more
+        </span>
+        <span
+          v-else
+          class="material-icons-outlined icon"
+        >
+          expand_less
+        </span>
+      </button>
     </section>
     <section class="content main-padded">
       <div class="article-wrapper scroll-hidden">
