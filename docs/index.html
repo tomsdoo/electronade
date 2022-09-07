@@ -60,12 +60,25 @@
     function reflectPage(page){
       console.log(page)
       state.currentPage = undefined;
-      waitMs(1).then(async () => {
-        state.currentPage = page;
-        return await waitMs(1);
-      }).then(() => {
-        hljs.highlightAll();
-      });
+      waitMs(1)
+        .then(() => {
+          state.currentPage = page;
+          return waitMs(1);
+        })
+        .then(onPageChanged);
+    }
+    function onPageChanged(){
+      hljs.highlightAll();
+      document.querySelectorAll("#article pre code.language-mermaid")
+        .forEach(codeTag => {
+          const container = codeTag.parentNode;
+          if(container.classList.contains("language-mermaid")){return;}
+          container.classList.add("language-mermaid");
+          const div = container.appendChild(document.createElement("div"));
+          div.innerHTML = codeTag.innerHTML;
+          div.classList.add("mermaid");
+        });
+      mermaid.init();
     }
     function toggleIndexFolded(){
       state.indexFolded = !state.indexFolded;
