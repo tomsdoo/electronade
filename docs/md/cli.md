@@ -6,7 +6,7 @@ electronade CLI helps you..
 
 ## help
 
-electronade command shows the help for it.
+electronade CLI shows the help for it.
 
 ``` shell
 npx electronade --help
@@ -14,7 +14,7 @@ npx electronade --help
 
 ## initialize
 
-electronade command creates a default config file.
+electronade CLI creates a default config file.
 
 ``` shell
 npx electronade --init
@@ -22,7 +22,7 @@ npx electronade --init
 
 ## prepare preload file
 
-electronade command prepares a preload file according to its config file.
+electronade CLI prepares a preload file according to its config file.
 
 ``` shell
 npx electronade --prepare-preload
@@ -30,7 +30,7 @@ npx electronade --prepare-preload
 
 ## prepare preload file with config file explicitly
 
-electronade command recognizes the config file with command line option `--config`.
+electronade CLI recognizes the config file with command line option `--config`.
 
 `electronade.config.js` will be adopted as a config file if `--config` does not exist.
 
