@@ -71,6 +71,7 @@ main > .content {
 main > .content > .article-wrapper {
   height: 100%;
   overflow-y: auto;
+  scroll-behavior: smooth;
 }
 main > .content > .article-wrapper > .article {
   min-height: 100%;
