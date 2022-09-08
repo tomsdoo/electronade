@@ -8,14 +8,15 @@ Let's get started.
 1. generate `preload.ts`
 1. call from renderer process
 
-## Installation
+***
+
+## 1. Installation
 Install electronade.
 
 ``` shell
 npm install electronade
 ```
-
-## Installation of `electronade package`
+## 2. Installation of `electronade package`
 
 `electronade-os` for example.
 
@@ -23,7 +24,7 @@ npm install electronade
 npm install electronade-os
 ```
 
-## call `setHandles()` in main process
+## 3. call `setHandles()` in main process
 
 `setHandles()` sets the handles of `electronade package`.
 
@@ -41,7 +42,7 @@ app.whenReady().then(() => {
 });
 ```
 
-## generate config file
+## 4. generate config file
 
 `electronade.config.js` will be created in your project root.
 And you can edit it. see [config file](#/md/config_file) details.
@@ -50,7 +51,7 @@ And you can edit it. see [config file](#/md/config_file) details.
 npx electronade --init
 ```
 
-## generate `preload.ts`
+## 5. generate `preload.ts`
 
 `preload.ts` will be generated.
 
@@ -58,7 +59,7 @@ npx electronade --init
 npx electronade --prepare-preload
 ```
 
-## call from renderer process
+## 6. call from renderer process
 
 ``` html
 <script>
