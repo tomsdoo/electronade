@@ -93,3 +93,21 @@
 #article > pre > code.language-mermaid {
   display: none;
 }
+
+/* code copy button */
+#article > pre.copyable {
+  position: relative;
+}
+#article > pre.copyable > .copy-button {
+  position: absolute;
+  top: 1em;
+  right: 0.5em;
+}
+#article > pre.copyable > .copy-button:hover {
+  text-shadow: 0 0 0.5px;
+}
+#article > pre.copyable > .copy-button > .icon {
+  width: 1em;
+  height: 1em;
+  font-size: inherit;
+}
