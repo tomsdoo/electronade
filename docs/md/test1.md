@@ -3,7 +3,13 @@
 this is test page 1  
 [this is a link](https://www.google.com/)  
 *this* is a **bold text**  
-***italic and bold***
+***italic and bold***  
+[test2 link](#/md/test2)
+
+``` mermaid
+classDiagram
+Animal <|-- Dog
+```
 
 ***
 
