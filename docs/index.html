@@ -62,7 +62,6 @@
       return new Promise((resolve) => setTimeout(resolve, ms));
     }
     function reflectPage(page){
-      console.log(page)
       if(!page){return;}
       state.currentPage = undefined;
       waitMs(1)
@@ -126,8 +125,6 @@
       );
       // TODO: remove below line, index items are increased temporarily
       state.pageContents = [...Array(50).keys()].map(() => [...state.pageContents]).flat();
-
-      console.log(state.pageContents)
 
       const app = Vue.createApp({
         setup: () => ({
