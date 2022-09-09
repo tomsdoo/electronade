@@ -123,8 +123,6 @@
           async (markdownPath) => await fetchPageContent(markdownPath)
         )
       );
-      // TODO: remove below line, index items are increased temporarily
-      state.pageContents = [...Array(50).keys()].map(() => [...state.pageContents]).flat();
 
       const app = Vue.createApp({
         setup: () => ({
