@@ -107,6 +107,11 @@
           });
         });
 
+      document.querySelectorAll("#article a[href^=http]")
+        .forEach(anchorTag => {
+          anchorTag.setAttribute("target", "_blank");
+        });
+
       document.querySelector(".article-wrapper").scrollTo(0, 0);
     }
     function toggleIndexFolded(){
