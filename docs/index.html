@@ -63,6 +63,7 @@
     }
     function reflectPage(page){
       console.log(page)
+      if(!page){return;}
       state.currentPage = undefined;
       waitMs(1)
         .then(() => {
