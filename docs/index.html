@@ -137,7 +137,7 @@
       app.mount("#app");
 
       window.addEventListener("hashchange", reflectHash);
-      if(!Boolean(location.hash)){
+      if(!Boolean(location.hash) && state.pageContents.length > 0){
         location.hash = state.pageContents[0].hashPath;
       }
       reflectHash();
