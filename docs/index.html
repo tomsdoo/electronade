@@ -20,12 +20,24 @@
   <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js" async defer></script>
   <script src="https://unpkg.com/vue@3"></script>
   <script>
-    const markdownPaths = [
+    const indexedPaths = [
       "/md/about.md",
       "/md/getting_started.md",
       "/md/config_file.md",
       "/md/cli.md",
       "/md/electronade_packages.md"
+    ];
+    const hiddenPaths = [
+    ];
+    const markdownPaths = [
+      ...indexedPaths.map(path => ({
+        path,
+        indexed: true
+      })),
+      ...hiddenPaths.map(path => ({
+        path,
+        indexed: false
+      }))
     ];
     const state = Vue.reactive({
       pageContents: [],
@@ -33,9 +45,10 @@
       indexFolded: false
     });
 
-    async function fetchPageContent(path){
+    async function fetchPageContent({ path, indexed }){
       return fetch(path)
         .then(async response => ({
+          indexed,
           rawPath: path,
           hashPath: path
             .replace(/index\.md$/, "")
@@ -123,9 +136,12 @@
         )
       );
 
+      const indexedPageContents = Vue.computed(() => state.pageContents.filter(({ indexed }) => indexed));
+
       const app = Vue.createApp({
         setup: () => ({
           state,
+          indexedPageContents,
           toggleIndexFolded
         })
       });
@@ -153,7 +169,7 @@
         :class="[state.indexFolded && 'folded']"
       >
         <li
-          v-for="(page, index) in state.pageContents"
+          v-for="(page, index) in indexedPageContents"
           :key="index"
           class="item"
         >
