@@ -31,7 +31,7 @@
   grid-template:
     "icon text" max-content / max-content 1fr;
   grid-gap: 0.5em;
-  align-items: center;
+  align-items: start;
   padding: 0.2em 1em;
 }
 .index-list > .item > .link:hover {
@@ -40,6 +40,7 @@
 .index-list > .item > .link > .icon {
   grid-area: icon;
   font-size: 1em;
+  padding-top: 0.2em;
 }
 .index-list > .item > .link > .text {
   grid-area: text;
