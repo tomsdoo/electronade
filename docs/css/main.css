@@ -1,0 +1,105 @@
+#app {
+  grid-area: main;
+  display: grid;
+  grid-template:
+    "index content" 1fr / max-content 1fr;
+  width: min(1100px, calc(100vw - 2rem));
+  margin: 0 auto;
+  height: var(--main-height);
+  grid-gap: 1rem;
+}
+
+.main-padded {
+  padding: 1rem;
+}
+
+.index {
+  grid-area: index;
+  height: 100%;
+  overflow: hidden;
+}
+
+.index-list {
+  height: 100%;
+  overflow-y: auto;
+  min-width: 10rem;
+  max-width: 15rem;
+}
+
+.index-list > .item > .link {
+  display: grid;
+  grid-template:
+    "icon text" max-content / max-content 1fr;
+  grid-gap: 0.5em;
+  align-items: start;
+  padding: 0.2em 1em;
+}
+.index-list > .item > .link:hover {
+  text-shadow: 0 0 0.5px;
+}
+.index-list > .item > .link > .icon {
+  grid-area: icon;
+  font-size: 1em;
+  padding-top: 0.2em;
+}
+.index-list > .item > .link > .text {
+  grid-area: text;
+}
+
+.index-toggle-button {
+  position: relative;
+  display: none;
+  padding: 0.2em;
+  width: 100%;
+  height: 2rem;
+  justify-content: center;
+  align-items: center;
+  background: #eeeeee;
+}
+.index-toggle-button > .icon {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(0, -50%);
+}
+
+main > .content {
+  grid-area: content;
+  height: 100%;
+  overflow: hidden;
+}
+
+main > .content > .article-wrapper {
+  height: 100%;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+main > .content > .article-wrapper > .article {
+  min-height: 100%;
+}
+
+@media screen and (max-width: 600px) {
+  #app {
+    grid-template:
+      "index" max-content
+      "content" 1fr / 1fr;
+  }
+  .index {
+    max-height: 20vh;
+    max-width: 100%;
+  }
+  .index.folded {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .index-list {
+    transition: height 200ms;
+    height: calc(100% - 2rem);
+  }
+  .index-list.folded {
+    height: 0;
+  }
+  .index-toggle-button {
+    display: grid;
+  }
+}

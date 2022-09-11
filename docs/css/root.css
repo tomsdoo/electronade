@@ -1,0 +1,35 @@
+:root {
+  --header-height: 3rem;
+  --footer-height: 2rem;
+  --main-height: calc(100vh - var(--header-height) - var(--footer-height));
+}
+
+.scroll-hidden {
+  scrollbar-width: none;
+}
+.scroll-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  display: grid;
+  grid-template:
+    "header" max-content
+    "main  " 1fr
+    "footer" max-content / 1fr;
+  height: 100vh;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  color: #232323;
+}
+
+.fade-enter-active {
+  transition: opacity 1000ms;
+}
+
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
+}
+
+.fade-leave-from, .fade-enter-to {
+  opacity: 1;
+}
