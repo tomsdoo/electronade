@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="/css/footer.css" />
   <link rel="stylesheet" href="/css/style.css" />
   <link rel="stylesheet" href="/css/markdown.css" />
+  <link rel="stylesheet" href="/css/search.css" />
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons%7CMaterial+Icons+Outlined" rel="stylesheet">
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/stackoverflow-light.min.css">
@@ -44,7 +45,8 @@
     const state = Vue.reactive({
       pageContents: [],
       currentPage: undefined,
-      indexFolded: false
+      indexFolded: false,
+      searchResult: undefined
     });
 
     async function fetchPageContent({ path, indexed }){
@@ -65,9 +67,28 @@
         }));
     }
     function reflectHash(){
+      const hashPathToGo = location.hash.substring(1);
+      state.searchResult = undefined;
+
+      if(hashPathToGo.match(/^\/search/)){
+        const [ hashPart, queryPart ] = location.hash.split("?");
+        if(!queryPart){return;}
+        const query = Object.fromEntries(
+          queryPart.split("&").map(kv => kv.split("=").map(decodeURIComponent))
+        );
+        document.querySelector("#keybox").value = query.keyword;
+        const keyl = query.keyword.split(" ");
+        state.currentPage = undefined;
+        state.searchResult = {
+          keyword: query.keyword,
+          pages: state.pageContents.filter(({ text }) => keyl.every(keye => text.match(new RegExp(keye, "i"))))
+        };
+        return;
+      }
+
       reflectPage(
         state.pageContents.find(
-          ({ hashPath }) => hashPath === location.hash.substring(1)
+          ({ hashPath }) => hashPath === hashPathToGo
         ) ||
         state.pageContents.length > 0 && state.pageContents[0]
       );
@@ -131,6 +152,14 @@
     function toggleIndexFolded(){
       state.indexFolded = !state.indexFolded;
     }
+    function search(event){
+      event.preventDefault();
+      const keybox = document.querySelector("#keybox");
+      const keyword = keybox.value;
+      keybox.value = "";
+      if(!Boolean(keyword)){return;}
+      location.href = "#/search?keyword="+encodeURIComponent(keyword);
+    }
     window.addEventListener("load", async () => {
       state.pageContents = await Promise.all(
         markdownPaths.map(
@@ -159,7 +188,12 @@
 </head>
 <body>
   <header id="header">
-    electronade
+    <div class="header-content">
+      <span>electronade</span>
+      <form onsubmit="search(event)" class="key-form">
+        <input id="keybox" />
+      </forn>
+    </div>
   </header>
   <main id="app" v-cloak>
     <section
@@ -211,7 +245,32 @@
             v-html="state.currentPage.html"
             id="article"
             class="article"
-          />
+          ></article>
+        </transition>
+        <transition name="fade">
+          <div
+            v-if="state.searchResult"
+            class="search-result"
+          >
+            <h1 class="title">
+              "{{ state.searchResult.keyword }}": {{ state.searchResult.pages.length }}
+            </h1>
+            <ul class="list">
+              <li
+                v-for="(page, index) in state.searchResult.pages"
+                :key="index"
+                class="item"
+              >
+                <a
+                  :href="'#'+page.hashPath"
+                  class="link"
+                >
+                  <span class="material-icons-outlined icon">article</span>
+                  <span class="text">{{ page.title }}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
         </transition>
       </div>
     </section>
