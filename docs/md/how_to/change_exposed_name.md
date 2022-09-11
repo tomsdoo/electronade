@@ -9,7 +9,7 @@ Change `input.exposingName` if you want to change the exposed name for renderer.
 
 ## example
 `config.js`
-```
+``` javascript
 module.exports = {
   input: {
     exposingName: "custom"
