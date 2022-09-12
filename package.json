@@ -15,8 +15,8 @@
     "lintfix:document:html": "prettier --write docs/index.html",
     "lintfix:document:server": "prettier --write doc_server.ts",
     "format:src": "prettier --write src/**/*.ts",
-    "lintfix:test": "prettier --write test/**/*.ts",
-    "lintfix": "npm run format:src && npm run lintfix:document && npm run lintfix:test",
+    "format:test": "prettier --write test/**/*.ts",
+    "lintfix": "npm run format:src && npm run lintfix:document && npm run format:test",
     "eslintfix": "npm run eslintfix:src && npm run eslintfix:test && npm run eslintfix:document:server",
     "eslintfix:src": "eslint --fix src/**/*.ts",
     "eslintfix:test": "eslint --fix test/**/*.ts",
@@ -30,7 +30,7 @@
     "docs/index.html": "npm run lintfix:document:html",
     "docs/css/**/*.css": "npm run lintfix:document:css",
     "doc_server.ts": "npm run lintfix:document:server",
-    "test/**/*.ts": "npm run lintfix:test"
+    "test/**/*.ts": "npm run format:test"
   },
   "keywords": [],
   "author": "tom",
