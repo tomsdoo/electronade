@@ -9,8 +9,7 @@
 
 #footer > .footer-link {
   display: grid;
-  grid-template:
-    "text icon" max-content / max-content max-content;
+  grid-template: "text icon" max-content / max-content max-content;
   align-items: center;
 }
 #footer > .footer-link > .text {

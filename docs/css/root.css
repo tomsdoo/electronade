@@ -18,7 +18,7 @@ body {
     "main  " 1fr
     "footer" max-content / 1fr;
   height: 100vh;
-  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-family: "M PLUS Rounded 1c", sans-serif;
   color: #232323;
 }
 
@@ -26,10 +26,12 @@ body {
   transition: opacity 1000ms;
 }
 
-.fade-enter-from, .fade-leave-to {
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
 }
 
-.fade-leave-from, .fade-enter-to {
+.fade-leave-from,
+.fade-enter-to {
   opacity: 1;
 }

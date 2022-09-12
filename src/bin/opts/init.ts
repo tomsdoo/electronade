@@ -15,10 +15,7 @@ module.exports = {
   }
 };`;
 
-export async function initializeConfigFile(){
-  const filePath = join(
-    cwd(),
-    "./electronade.config.js"
-  );
+export async function initializeConfigFile() {
+  const filePath = join(cwd(), "./electronade.config.js");
   await writeFile(filePath, configFileContent);
 }
