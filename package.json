@@ -11,6 +11,7 @@
   "scripts": {
     "build": "tsc --project tsconfig.cjs.json && tsc --project tsconfig.esm.json && tsc --project tsconfig.bin.json",
     "fix-staged:src": "npm run lintfix:src && npm run format:src",
+    "fix-staged:document:server": "npm run lintfix:document:server && npm run format:document:server",
     "format:document": "npm run format:document:html && npm run format:document:css && npm run format:document:server",
     "format:document:css": "prettier --write docs/css/**/*.css",
     "format:document:html": "prettier --write docs/index.html",
@@ -30,7 +31,7 @@
     "src/**/*.ts": "npm run fix-staged:src",
     "docs/index.html": "npm run format:document:html",
     "docs/css/**/*.css": "npm run format:document:css",
-    "doc_server.ts": "npm run format:document:server",
+    "doc_server.ts": "npm run fix-staged:document:server",
     "test/**/*.ts": "npm run format:test"
   },
   "keywords": [],
