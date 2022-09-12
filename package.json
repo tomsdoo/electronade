@@ -17,6 +17,7 @@
     "lintfix:src": "prettier --write src/**/*.ts",
     "lintfix:test": "prettier --write test/**/*.ts",
     "lintfix": "npm run lintfix:src && npm run lintfix:document && npm run lintfix:test",
+    "prepare": "husky install",
     "serve:doc": "ts-node doc_server",
     "test": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha -r ts-node/register \"test/**/*.ts\" --timeout 30000"
   },
