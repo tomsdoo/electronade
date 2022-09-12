@@ -9,11 +9,10 @@ type Handles = {
 };
 
 export const setHandles = (handles: Handles) => {
-  Object.values(handles)
-    .forEach(arrayOfHandles => {
-      arrayOfHandles.forEach(({ eventName, handler }) => {
-        // @ts-ignore
-        ipcMain.handle(eventName, handler);
-      });
+  Object.values(handles).forEach((arrayOfHandles) => {
+    arrayOfHandles.forEach(({ eventName, handler }) => {
+      // @ts-ignore
+      ipcMain.handle(eventName, handler);
     });
+  });
 };

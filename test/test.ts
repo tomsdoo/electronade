@@ -7,18 +7,12 @@ import { setHandles } from "../src/main/";
 const ipcMain: {
   handle: (eventName: string, handler: Function) => undefined;
 } = {
-  handle: () => undefined
+  handle: () => undefined,
 };
 
 describe("setHandles", () => {
   it("calling", () => {
-    const [
-      eventName,
-      handler
-    ] = [
-      "event name",
-      () => undefined
-    ];
+    const [eventName, handler] = ["event name", () => undefined];
     const mocked = mock(ipcMain);
     mocked
       .expects("handle")
@@ -28,9 +22,7 @@ describe("setHandles", () => {
 
     assert.equal(
       eval(setHandles.toString())({
-        testHandles: [
-          { eventName, handler }
-        ]
+        testHandles: [{ eventName, handler }],
       }),
       undefined
     );

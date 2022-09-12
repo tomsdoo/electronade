@@ -1,17 +1,14 @@
 #!/usr/bin/env node
 import { Command } from "commander";
-import {
-  initializeConfigFile,
-  preparePreload
-} from "./opts/";
+import { initializeConfigFile, preparePreload } from "./opts/";
 
 const program = new Command();
 const commandname = "electronade";
 
 program
-  .option('--prepare-preload', 'prepare preload.ts')
-  .option('-c --config <electronade.config.js path>', 'config file')
-  .option('--init', 'initialize config file');
+  .option("--prepare-preload", "prepare preload.ts")
+  .option("-c --config <electronade.config.js path>", "config file")
+  .option("--init", "initialize config file");
 
 program.on("--help", () => {
   console.log("");
@@ -25,12 +22,12 @@ program.parse(process.argv);
 
 const opts = program.opts();
 
-if(Object.values(opts).length === 0){
+if (Object.values(opts).length === 0) {
   program.help();
 }
 
-if(opts.init){
+if (opts.init) {
   initializeConfigFile();
-}else if(opts.preparePreload){
+} else if (opts.preparePreload) {
   preparePreload(opts.config);
 }

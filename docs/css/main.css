@@ -1,8 +1,7 @@
 #app {
   grid-area: main;
   display: grid;
-  grid-template:
-    "index content" 1fr / max-content 1fr;
+  grid-template: "index content" 1fr / max-content 1fr;
   width: min(1100px, calc(100vw - 2rem));
   margin: 0 auto;
   height: var(--main-height);
@@ -28,8 +27,7 @@
 
 .index-list > .item > .link {
   display: grid;
-  grid-template:
-    "icon text" max-content / max-content 1fr;
+  grid-template: "icon text" max-content / max-content 1fr;
   grid-gap: 0.5em;
   align-items: start;
   padding: 0.2em 1em;
