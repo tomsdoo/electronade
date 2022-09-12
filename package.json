@@ -17,10 +17,10 @@
     "format:src": "prettier --write src/**/*.ts",
     "format:test": "prettier --write test/**/*.ts",
     "format": "npm run format:src && npm run format:document && npm run format:test",
-    "eslintfix": "npm run lintfix:src && npm run lintfix:test && npm run eslintfix:document:server",
+    "eslintfix": "npm run lintfix:src && npm run lintfix:test && npm run lintfix:document:server",
     "lintfix:src": "eslint --fix src/**/*.ts",
     "lintfix:test": "eslint --fix test/**/*.ts",
-    "eslintfix:document:server": "eslint --fix doc_server.ts",
+    "lintfix:document:server": "eslint --fix doc_server.ts",
     "prepare": "husky install",
     "serve:doc": "ts-node doc_server",
     "test": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha -r ts-node/register \"test/**/*.ts\" --timeout 30000"
