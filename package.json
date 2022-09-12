@@ -10,8 +10,8 @@
   },
   "scripts": {
     "build": "tsc --project tsconfig.cjs.json && tsc --project tsconfig.esm.json && tsc --project tsconfig.bin.json",
-    "lintfix:document": "npm run lintfix:document:html && npm run lintfix:document:css && npm run lintfix:document:server",
-    "lintfix:document:css": "prettier --write docs/css/**/*.css",
+    "lintfix:document": "npm run lintfix:document:html && npm run format:document:css && npm run lintfix:document:server",
+    "format:document:css": "prettier --write docs/css/**/*.css",
     "lintfix:document:html": "prettier --write docs/index.html",
     "lintfix:document:server": "prettier --write doc_server.ts",
     "format:src": "prettier --write src/**/*.ts",
@@ -28,7 +28,7 @@
   "lint-staged": {
     "src/**/*.ts": "npm run format:src",
     "docs/index.html": "npm run lintfix:document:html",
-    "docs/css/**/*.css": "npm run lintfix:document:css",
+    "docs/css/**/*.css": "npm run format:document:css",
     "doc_server.ts": "npm run lintfix:document:server",
     "test/**/*.ts": "npm run format:test"
   },
