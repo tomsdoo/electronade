@@ -10,6 +10,7 @@
   },
   "scripts": {
     "build": "tsc --project tsconfig.cjs.json && tsc --project tsconfig.esm.json && tsc --project tsconfig.bin.json",
+    "fix-staged:src": "npm run lintfix:src && npm run format:src",
     "format:document": "npm run format:document:html && npm run format:document:css && npm run format:document:server",
     "format:document:css": "prettier --write docs/css/**/*.css",
     "format:document:html": "prettier --write docs/index.html",
@@ -26,7 +27,7 @@
     "test": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha -r ts-node/register \"test/**/*.ts\" --timeout 30000"
   },
   "lint-staged": {
-    "src/**/*.ts": "npm run format:src",
+    "src/**/*.ts": "npm run fix-staged:src",
     "docs/index.html": "npm run format:document:html",
     "docs/css/**/*.css": "npm run format:document:css",
     "doc_server.ts": "npm run format:document:server",
