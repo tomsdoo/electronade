@@ -1,22 +1,20 @@
-// @ts-ignore
 import Koa from "koa";
-// @ts-ignore
+// @ts-expect-error
 import Router from "koa-router";
-// @ts-ignore
+// @ts-expect-error
 import serve from "koa-static-server";
-import { Context } from "koa";
+import * as path from "path";
+import * as fs from "fs";
 
 const app = new Koa();
 const router = new Router();
-import * as path from "path";
-import * as fs from "fs";
 
 (async () => {
   ///
 
-  const port = process.env.PORT || 3000;
+  const port = Number(process.env.PORT ?? 3000);
 
-  async function indexhtml(ctx: Context) {
+  async function indexhtml(ctx: Koa.Context): Promise<any> {
     ctx.response.status = 200;
     ctx.response.type = "text/html";
     ctx.response.body = await fs.promises.readFile(
@@ -40,4 +38,6 @@ import * as fs from "fs";
   });
 
   ///
-})();
+})()
+  .then(() => {})
+  .catch(() => {});
