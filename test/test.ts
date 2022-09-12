@@ -21,6 +21,7 @@ describe("setHandles", () => {
       .returns(undefined);
 
     assert.equal(
+      // eslint-disable-next-line
       eval(setHandles.toString())({
         testHandles: [{ eventName, handler }],
       }),
