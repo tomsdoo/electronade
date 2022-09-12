@@ -3,19 +3,19 @@ import { cwd } from "process";
 import { join } from "path";
 import { readFile, stat, writeFile } from "fs/promises";
 
-type PreloadObject = {
+interface PreloadObject {
   [key: string]: {
     [key: string]: Function;
   };
-};
-type PreloadObjects = {
+}
+interface PreloadObjects {
   [key: string]: PreloadObject;
-};
+}
 
 function generatePreloadLines(
   exposingName: string,
   preloadObjects: PreloadObjects
-) {
+): string {
   const dictionary: {
     [key: string]: string;
   } = {};
@@ -55,7 +55,6 @@ function generatePreloadLines(
         line.match(new RegExp(`"${dictionaryKey}"`))
       );
       const preSpaces = [
-        // @ts-ignore
         ...Array(line.indexOf(line.replace(/^\s+/, ""))).keys(),
       ]
         .map(() => " ")
@@ -76,11 +75,13 @@ contextBridge.exposeInMainWorld("${exposingName}", ${Object.entries(
 `;
 }
 
-export async function preparePreload(configPath?: string) {
+export async function preparePreload(configPath?: string): Promise<any> {
+  // eslint-disable-next-line
   const localPath = join(cwd(), configPath || "electronade.config.js");
   const filePath = await stat(localPath)
     .then((r) => localPath)
     .catch((e) => configPath);
+  // eslint-disable-next-line
   if (!filePath) {
     console.log("config file is not found");
     return;
@@ -89,12 +90,14 @@ export async function preparePreload(configPath?: string) {
   const {
     input: { baseFile, exposingName, preloadObjects },
     output: { file: outPath },
+    // eslint-disable-next-line
   } = require(filePath);
 
   const baseContent = await readFile(baseFile, { encoding: "utf8" }).catch(
     () => `import { contextBridge, ipcRenderer } from "electron";\n`
   );
   const additionalContent = generatePreloadLines(
+    // eslint-disable-next-line
     exposingName || "electronade",
     preloadObjects
   );

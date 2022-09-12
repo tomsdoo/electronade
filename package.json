@@ -17,6 +17,10 @@
     "lintfix:src": "prettier --write src/**/*.ts",
     "lintfix:test": "prettier --write test/**/*.ts",
     "lintfix": "npm run lintfix:src && npm run lintfix:document && npm run lintfix:test",
+    "eslintfix": "npm run eslintfix:src && npm run eslintfix:test && npm run eslintfix:document:server",
+    "eslintfix:src": "eslint --fix src/**/*.ts",
+    "eslintfix:test": "eslint --fix test/**/*.ts",
+    "eslintfix:document:server": "eslint --fix doc_server.ts",
     "prepare": "husky install",
     "serve:doc": "ts-node doc_server",
     "test": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha -r ts-node/register \"test/**/*.ts\" --timeout 30000"
@@ -37,7 +41,16 @@
     "@types/mocha": "^9.1.1",
     "@types/sinon": "^10.0.13",
     "@types/uuid": "^8.3.4",
+    "@typescript-eslint/eslint-plugin": "^5.36.2",
+    "@typescript-eslint/parser": "^5.36.2",
     "electron": "^20.0.2",
+    "eslint": "^8.23.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard-with-typescript": "^22.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.2.5",
+    "eslint-plugin-promise": "^6.0.1",
+    "eslint-plugin-vue": "^9.4.0",
     "husky": "^8.0.1",
     "koa": "^2.13.4",
     "koa-router": "^12.0.0",
@@ -47,7 +60,7 @@
     "prettier": "^2.7.1",
     "sinon": "^14.0.0",
     "ts-node": "^10.9.1",
-    "typescript": "^4.7.4"
+    "typescript": "^4.8.3"
   },
   "dependencies": {
     "commander": "^9.4.0",
