@@ -18,16 +18,24 @@ program.on("--help", () => {
   console.log(`  $${commandname} --prepare-preload`);
 });
 
-program.parse(process.argv);
+(async () => {
+  ///
 
-const opts = program.opts();
+  program.parse(process.argv);
 
-if (Object.values(opts).length === 0) {
-  program.help();
-}
+  const opts = program.opts();
 
-if (opts.init) {
-  initializeConfigFile();
-} else if (opts.preparePreload) {
-  preparePreload(opts.config);
-}
+  if (Object.values(opts).length === 0) {
+    program.help();
+  }
+
+  if (opts.init as boolean) {
+    await initializeConfigFile();
+  } else if (opts.preparePreload as boolean) {
+    await preparePreload(opts.config);
+  }
+
+  ///
+})()
+  .then(() => {})
+  .catch(() => {});

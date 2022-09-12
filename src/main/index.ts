@@ -1,17 +1,17 @@
+// eslint-disable-next-line
 const { ipcMain } = require("electron");
 
-type Handle = {
+interface Handle {
   eventName: string;
   handler: Function;
-};
-type Handles = {
+}
+interface Handles {
   [key: string]: Handle[];
-};
+}
 
-export const setHandles = (handles: Handles) => {
+export const setHandles: (handles: Handles) => any = (handles: Handles) => {
   Object.values(handles).forEach((arrayOfHandles) => {
     arrayOfHandles.forEach(({ eventName, handler }) => {
-      // @ts-ignore
       ipcMain.handle(eventName, handler);
     });
   });

@@ -15,7 +15,7 @@ module.exports = {
   }
 };`;
 
-export async function initializeConfigFile() {
+export async function initializeConfigFile(): Promise<any> {
   const filePath = join(cwd(), "./electronade.config.js");
   await writeFile(filePath, configFileContent);
 }
