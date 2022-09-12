@@ -14,9 +14,9 @@
     "lintfix:document:css": "prettier --write docs/css/**/*.css",
     "lintfix:document:html": "prettier --write docs/index.html",
     "lintfix:document:server": "prettier --write doc_server.ts",
-    "lintfix:src": "prettier --write src/**/*.ts",
+    "format:src": "prettier --write src/**/*.ts",
     "lintfix:test": "prettier --write test/**/*.ts",
-    "lintfix": "npm run lintfix:src && npm run lintfix:document && npm run lintfix:test",
+    "lintfix": "npm run format:src && npm run lintfix:document && npm run lintfix:test",
     "eslintfix": "npm run eslintfix:src && npm run eslintfix:test && npm run eslintfix:document:server",
     "eslintfix:src": "eslint --fix src/**/*.ts",
     "eslintfix:test": "eslint --fix test/**/*.ts",
@@ -26,7 +26,7 @@
     "test": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha -r ts-node/register \"test/**/*.ts\" --timeout 30000"
   },
   "lint-staged": {
-    "src/**/*.ts": "npm run lintfix:src",
+    "src/**/*.ts": "npm run format:src",
     "docs/index.html": "npm run lintfix:document:html",
     "docs/css/**/*.css": "npm run lintfix:document:css",
     "doc_server.ts": "npm run lintfix:document:server",
