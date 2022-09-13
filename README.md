@@ -2,6 +2,13 @@
 
 It's a framework helper for the electron projects.
 
+![npm](https://img.shields.io/npm/v/electronade)
+![NPM](https://img.shields.io/npm/l/electronade)
+![npms.io (quality)](https://img.shields.io/npms-io/quality-score/electronade)
+![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/electronade)
+![Maintenance](https://img.shields.io/maintenance/yes/2022)
+
+
 # Installation
 
 ``` shell
@@ -9,6 +16,8 @@ npm install electronade
 ```
 
 # Usage
+
+See [electronade.netlify.app](https://electronade.netlify.app/) for details.
 
 ### setting handles from electronade packages
 `main.ts`
