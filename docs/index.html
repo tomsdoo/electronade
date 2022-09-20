@@ -1,309 +1,33 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8" />
-    <title>electronade</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="electronade is an npm package that provides the extension feature for electron."
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/destyle.css/destyle.min.css"
-    />
-    <link rel="stylesheet" href="/css/root.css" />
-    <link rel="stylesheet" href="/css/header.css" />
-    <link rel="stylesheet" href="/css/main.css" />
-    <link rel="stylesheet" href="/css/footer.css" />
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/markdown.css" />
-    <link rel="stylesheet" href="/css/search.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons%7CMaterial+Icons+Outlined"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/stackoverflow-light.min.css"
-    />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"
-      async
-      defer
-    ></script>
-    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tomsd/md-book/public/js/index.js"></script>
     <script>
-      const indexedPaths = [
-        "/md/about.md",
-        "/md/getting_started.md",
-        "/md/config_file.md",
-        "/md/cli.md",
-        "/md/electronade_packages.md",
-        "/md/how_to.md",
-      ];
-      const hiddenPaths = [
-        "/md/how_to/change_exposed_name.md",
-        "/md/how_to/change_name_of_preload_ts.md",
-      ];
-      const markdownPaths = [
-        ...indexedPaths.map((path) => ({
-          path,
-          indexed: true,
-        })),
-        ...hiddenPaths.map((path) => ({
-          path,
-          indexed: false,
-        })),
-      ];
-      const state = Vue.reactive({
-        pageContents: [],
-        currentPage: undefined,
-        indexFolded: false,
-        searchResult: undefined,
-      });
-
-      async function fetchPageContent({ path, indexed }) {
-        return fetch(path)
-          .then(async (response) => ({
-            indexed,
-            rawPath: path,
-            hashPath: path.replace(/index\.md$/, "").replace(/\.md$/, ""),
-            url: response.url,
-            text: await response.text(),
-          }))
-          .then((content) => ({
-            ...content,
-            title: content.text.split("\n")[0].replace(/^# /, ""),
-            html: marked.parse(content.text),
-          }));
-      }
-      function reflectHash() {
-        const hashPathToGo = location.hash.substring(1);
-        state.searchResult = undefined;
-
-        if (hashPathToGo.match(/^\/search/)) {
-          const [hashPart, queryPart] = location.hash.split("?");
-          if (!queryPart) {
-            return;
-          }
-          const query = Object.fromEntries(
-            queryPart
-              .split("&")
-              .map((kv) => kv.split("=").map(decodeURIComponent))
-          );
-          document.querySelector("#keybox").value = query.keyword;
-          const keyl = query.keyword.split(" ");
-          state.currentPage = undefined;
-          state.searchResult = {
-            keyword: query.keyword,
-            pages: state.pageContents.filter(({ text }) =>
-              keyl.every((keye) => text.match(new RegExp(keye, "i")))
-            ),
-          };
-          return;
-        }
-
-        reflectPage(
-          state.pageContents.find(
-            ({ hashPath }) => hashPath === hashPathToGo
-          ) ||
-            (state.pageContents.length > 0 && state.pageContents[0])
-        );
-      }
-      function waitMs(ms) {
-        return new Promise((resolve) => setTimeout(resolve, ms));
-      }
-      function reflectPage(page) {
-        if (!page) {
-          return;
-        }
-        state.currentPage = undefined;
-        waitMs(1)
-          .then(() => {
-            state.currentPage = page;
-            return waitMs(1);
-          })
-          .then(onPageChanged);
-      }
-      function onPageChanged() {
-        hljs.highlightAll();
-        document
-          .querySelectorAll("#article pre code.language-mermaid")
-          .forEach((codeTag) => {
-            const container = codeTag.parentNode;
-            if (container.classList.contains("language-mermaid")) {
-              return;
-            }
-            container.classList.add("language-mermaid");
-            const div = container.appendChild(document.createElement("div"));
-            div.innerHTML = codeTag.innerHTML;
-            div.classList.add("mermaid");
-          });
-        mermaid.init();
-
-        document
-          .querySelectorAll("#article pre code.hljs")
-          .forEach((codeTag) => {
-            const container = codeTag.parentNode;
-            if (container.classList.contains("copyable")) {
-              return;
-            }
-            container.classList.add("copyable");
-            const button = container.appendChild(
-              document.createElement("button")
-            );
-            button.classList.add("copy-button");
-            const iconTag = button.appendChild(document.createElement("span"));
-            iconTag.classList.add("material-icons", "icon");
-            iconTag.innerHTML = "content_copy";
-            button.addEventListener("click", () => {
-              navigator.clipboard
-                .writeText(codeTag.textContent)
-                .then(() => {
-                  iconTag.innerHTML = "done";
-                  return waitMs(1000);
-                })
-                .then(() => {
-                  iconTag.innerHTML = "content_copy";
-                });
-            });
-          });
-
-        document
-          .querySelectorAll("#article a[href^=http]")
-          .forEach((anchorTag) => {
-            anchorTag.setAttribute("target", "_blank");
-          });
-
-        document.querySelector(".article-wrapper").scrollTo(0, 0);
-      }
-      function toggleIndexFolded() {
-        state.indexFolded = !state.indexFolded;
-      }
-      function search(event) {
-        event.preventDefault();
-        const keybox = document.querySelector("#keybox");
-        const keyword = keybox.value;
-        keybox.value = "";
-        if (!Boolean(keyword)) {
-          return;
-        }
-        location.href = "#/search?keyword=" + encodeURIComponent(keyword);
-      }
-      window.addEventListener("load", async () => {
-        state.pageContents = await Promise.all(
-          markdownPaths.map(
-            async (markdownPath) => await fetchPageContent(markdownPath)
-          )
-        );
-
-        const indexedPageContents = Vue.computed(() =>
-          state.pageContents.filter(({ indexed }) => indexed)
-        );
-
-        const app = Vue.createApp({
-          setup: () => ({
-            state,
-            indexedPageContents,
-            toggleIndexFolded,
-          }),
-        });
-        app.mount("#app");
-
-        window.addEventListener("hashchange", reflectHash);
-        if (!Boolean(location.hash) && state.pageContents.length > 0) {
-          location.hash = state.pageContents[0].hashPath;
-        }
-        reflectHash();
+      MdBook.start({
+        mdFiles: {
+          indexedPaths: [
+            "/md/about.md",
+            "/md/getting_started.md",
+            "/md/config_file.md",
+            "/md/cli.md",
+            "/md/electronade_packages.md",
+            "/md/how_to.md",
+          ],
+          hiddenPaths: [
+            "/md/how_to/change_exposed_name.md",
+            "/md/how_to/change_name_of_preload_ts.md",
+          ],
+        },
+        header: { title: "electronade" },
+        footer: {
+          text: "powered by ",
+          link: {
+            href: "https://www.npmjs.com/package/@tomsd/md-book",
+            text: "md-book",
+          },
+        },
       });
     </script>
   </head>
-  <body>
-    <header id="header">
-      <div class="header-content">
-        <span>electronade</span>
-        <form onsubmit="search(event)" class="key-form">
-          <input id="keybox" />
-        </form>
-      </div>
-    </header>
-    <main id="app" v-cloak>
-      <section
-        class="index main-padded"
-        :class="[state.indexFolded && 'folded']"
-      >
-        <ul
-          class="index-list scroll-hidden"
-          :class="[state.indexFolded && 'folded']"
-        >
-          <li
-            v-for="(page, index) in indexedPageContents"
-            :key="index"
-            class="item"
-          >
-            <a :href="'#'+page.hashPath" class="link">
-              <span class="material-icons-outlined icon">article</span>
-              <span class="text">{{ page.title }}</span>
-            </a>
-          </li>
-        </ul>
-        <button v-on:click="toggleIndexFolded()" class="index-toggle-button">
-          index
-          <span v-if="state.indexFolded" class="material-icons-outlined icon">
-            expand_more
-          </span>
-          <span v-else class="material-icons-outlined icon"> expand_less </span>
-        </button>
-      </section>
-      <section class="content main-padded">
-        <div class="article-wrapper scroll-hidden">
-          <transition name="fade">
-            <article
-              v-if="state.currentPage"
-              v-html="state.currentPage.html"
-              id="article"
-              class="article"
-            ></article>
-          </transition>
-          <transition name="fade">
-            <div v-if="state.searchResult" class="search-result">
-              <h1 class="title">
-                "{{ state.searchResult.keyword }}": {{
-                state.searchResult.pages.length }}
-              </h1>
-              <ul class="list">
-                <li
-                  v-for="(page, index) in state.searchResult.pages"
-                  :key="index"
-                  class="item"
-                >
-                  <a :href="'#'+page.hashPath" class="link">
-                    <span class="material-icons-outlined icon">article</span>
-                    <span class="text">{{ page.title }}</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </transition>
-        </div>
-      </section>
-    </main>
-    <footer id="footer">
-      <a
-        href="https://www.npmjs.com/package/electronade"
-        class="footer-link"
-        target="_blank"
-      >
-        <span class="text">npm electronade</span>
-        <span class="material-icons icon">open_in_new</span>
-      </a>
-    </footer>
-  </body>
+  <body></body>
 </html>
