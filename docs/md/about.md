@@ -16,4 +16,4 @@ electronade sets the handles on a electron application from `electronade package
 
 electronade generates `preload.ts` according to its config file.
 
-- [getting started](#/md/getting_started)
+- [getting started](./getting_started.md)

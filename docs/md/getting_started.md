@@ -45,7 +45,7 @@ app.whenReady().then(() => {
 ## 4. generate config file
 
 `electronade.config.js` will be created in your project root.
-And you can edit it. see [config file](#/md/config_file) details.
+And you can edit it. see [config file](./config_file.md) details.
 
 ``` shell
 npx electronade --init
