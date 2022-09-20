@@ -1,6 +1,6 @@
 # How to change the exposed name for renderer
 
-electronade CLI generates `preload.ts` according to [config file](#/md/config_file).
+electronade CLI generates `preload.ts` according to [config file](../config_file.md).
 
 `input.exposingName` is the definition of the exposed name for renderer process.  
 And its value is `electronade` as default(`electronade --init`).
