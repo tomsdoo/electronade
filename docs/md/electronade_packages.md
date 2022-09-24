@@ -13,6 +13,7 @@ You can use electronade packages without understanding what they are. But knowin
 
 The sttuctures of `electronade package` are like below, though they are not classes strictly.
 ``` mermaid
+%%{ init: { "theme": "dark" }  }%%
 classDiagram
 
 class electronade_package {
