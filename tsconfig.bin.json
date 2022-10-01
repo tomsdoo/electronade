@@ -3,7 +3,8 @@
   "compilerOptions": {
     "target": "es2015",
     "module": "commonjs",
-     "outDir": "./bin/",
+    "outDir": "./bin/",
+    "declaration": false
   },
   "files":[
     "src/bin/electronade.ts"
