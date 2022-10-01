@@ -1,6 +1,6 @@
 {
   "name": "electronade",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "electronade is a framework helper for the electron projects.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -33,7 +33,9 @@
     "docs/index.html": "npm run format:document:html",
     "test/**/*.ts": "npm run fix-staged:test"
   },
-  "keywords": [ "electron" ],
+  "keywords": [
+    "electron"
+  ],
   "author": "tom",
   "license": "MIT",
   "devDependencies": {
