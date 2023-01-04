@@ -6,7 +6,7 @@ It's a framework helper for the electron projects.
 ![NPM](https://img.shields.io/npm/l/electronade)
 ![npms.io (quality)](https://img.shields.io/npms-io/quality-score/electronade)
 ![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/electronade)
-![Maintenance](https://img.shields.io/maintenance/yes/2022)
+![Maintenance](https://img.shields.io/maintenance/yes/2023)
 
 
 # Installation
